@@ -1,476 +1,586 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anderson | Portfólio</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root{--bg:#1a1c23;--card:#22252d;--borda:#323642;--amarelo:#facc15;--amarelo-claro:#fde047;--texto:#fff;--cinza:#a1a1aa}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--texto);line-height:1.6;overflow-x:hidden}
-.nav{position:fixed;top:20px;width:100%;display:flex;justify-content:center;z-index:1000;animation:fadeDown 0.8s ease}
-nav{background:rgba(34,37,45,0.9);border:1px solid var(--borda);border-radius:50px;padding:12px 35px;display:flex;gap:30px;box-shadow:0 10px 30px rgba(0,0,0,0.5);backdrop-filter:blur(10px)}
-nav a{color:var(--cinza);text-decoration:none;font-size:14px;font-weight:600;cursor:pointer;transition:color 0.3s}
-nav a:hover{color:var(--amarelo-claro)}
-.container{max-width:1200px;margin:0 auto;padding:120px 20px 60px 20px;display:flex;flex-direction:column;gap:30px;position:relative;z-index:2}
-.box{background:rgba(34,37,45,0.85);border:1px solid var(--borda);border-radius:24px;padding:40px;transition:0.4s;position:relative;overflow:hidden;backdrop-filter:blur(4px)}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escritório de Arquitetura no Rio de Janeiro | Ramon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Alike&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-header: #7f5f49;
+            --cor-header-escura: #523b2d;
+            --cor-fundo: #f8efe5;
+            --cor-fundo-suave: #efe1d0;
+            --cor-texto: #1f1a17;
+            --cor-titulo: #b64d10;
+            --cor-destaque: #d7681d;
+            --cor-branco: #fffdf9;
+            --sombra-suave: 0 18px 40px rgba(48, 28, 20, 0.14);
+            --sombra-mais-forte: 0 22px 44px rgba(38, 22, 16, 0.2);
+            --font-alike: 'Alike', serif;
+            --font-opensans: 'Open Sans', sans-serif;
+            --font-quicksand: 'Quicksand', sans-serif;
+        }
 
-/* FUNDOS DINÂMICOS */
-.bg-hero{background-image:linear-gradient(rgba(34,37,45,0.92),rgba(34,37,45,0.92)),url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop');background-size:cover;background-position:center}
-.bg-footer{background-image:linear-gradient(rgba(34,37,45,0.88),rgba(34,37,45,0.88)),url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop');background-size:cover;background-position:center}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-opensans);
+            background: linear-gradient(180deg, #f7f1e7 0%, var(--cor-fundo) 100%);
+            color: var(--cor-texto);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-/* ANIMAÇÃO DE FUNDO (CANVAS + GRID) */
-#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(250,204,21,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(250,204,21,0.07) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 40%,transparent 100%);animation:gridMove 40s linear infinite}
-@keyframes gridMove{from{background-position:0 0}to{background-position:40px 40px}}
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-.hero{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
-.hero-text{flex:1;min-width:300px;z-index:2}
-.hero h1{font-size:46px;margin:0 0 15px 0;line-height:1.1}
-.hero h1 span{color:var(--cinza);font-style:italic}
-.hero p{color:var(--cinza);font-size:18px;margin-bottom:30px}
-.botoes{display:flex;gap:12px;flex-wrap:wrap}
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* ANIMAÇÕES DE ENTRADA */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glowPulse{0%,100%{opacity:0.15;transform:translate(-50%,-50%) scale(1)}50%{opacity:0.28;transform:translate(-50%,-50%) scale(1.08)}}
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(182, 77, 16, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(182, 77, 16, 0.18); }
+        }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
 
-.anim{opacity:0;animation:fadeUp 0.8s ease forwards}
-.anim-1{animation-delay:0.1s}
-.anim-2{animation-delay:0.25s}
-.anim-3{animation-delay:0.4s}
-.anim-4{animation-delay:0.55s}
-.anim-5{animation-delay:0.7s}
+        /* --- HEADER MARROM --- */
+        .header {
+            background: linear-gradient(90deg, var(--cor-header) 0%, var(--cor-header-escura) 100%);
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(78, 52, 35, 0.18);
+            backdrop-filter: blur(10px);
+        }
+        .logo { font-family: var(--font-alike); color: #fff; font-size: 38px; line-height: 1; cursor: pointer; letter-spacing: 0.04em; }
+        .logo span { display: block; font-family: var(--font-opensans); font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 7px; }
+        .nav-menu { display: flex; list-style: none; gap: 32px; align-items: center; }
+        .nav-menu li a {
+            color: #fff;
+            font-size: 15px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease, filter 0.25s ease;
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 4px;
+            display: inline-block;
+            text-shadow: 0 0 0 rgba(255,255,255,0);
+        }
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.9), rgba(255,255,255,0.3));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .nav-menu li a:hover {
+            opacity: 1;
+            transform: translateY(-1px) scale(1.03);
+            color: #fffdf7;
+            text-shadow: 0 6px 18px rgba(255,255,255,0.18);
+            filter: brightness(1.05);
+        }
+        .nav-menu li a:hover::after { transform: scaleX(1); }
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 999px;
+            padding: 8px 18px;
+            width: 260px;
+            background: rgba(255,255,255,0.04);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .search-container:focus-within {
+            border-color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.07);
+        }
+        .search-container input { background: transparent; border: none; color: #fff; outline: none; font-size: 14px; width: 100%; }
+        .search-container input::placeholder { color: rgba(255,255,255,0.72); }
+        .search-container button { background: transparent; border: none; color: #fff; cursor: pointer; display: flex; align-items: center; opacity: 0.85; }
 
-/* BOTÕES COM ANIMAÇÕES POR COR - estilo mais vibrante */
-.btn{padding:12px 24px;border-radius:50px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:15px;text-decoration:none;color:var(--texto);position:relative;overflow:hidden}
-.btn:hover{transform:translateY(-3px) scale(1.03)}
-.btn:active{transform:translateY(0)}
+        /* --- HERO (TOPO IGUAL AO PRINT) --- */
+        .hero {
+            width: 100%; height: 82vh;
+            min-height: 640px;
+            background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; padding-left: 10%;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(19,16,14,0.7), rgba(19,16,14,0.14));
+        }
+        .hero-box {
+            background: rgba(15, 12, 10, 0.56);
+            backdrop-filter: blur(2px);
+            padding: 60px 56px;
+            max-width: 820px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: var(--sombra-suave);
+            animation: floatIn 0.9s ease-out both;
+        }
+        .hero-title { font-family: var(--font-alike); font-size: clamp(3.1rem, 4.8vw, 5rem); line-height: 0.96; margin-bottom: 24px; font-weight: 400; letter-spacing: 0.015em; text-transform: none; }
+        .hero-subtitle { font-family: var(--font-opensans); font-size: clamp(1.15rem, 1.8vw, 1.5rem); font-weight: 400; line-height: 1.6; margin-bottom: 32px; max-width: 760px; letter-spacing: 0.01em; }
+        .btn-hero {
+            display: inline-block; padding: 16px 38px; border: 1px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.05); color: #fff;
+            font-family: var(--font-opensans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.2px; cursor: pointer; transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.14);
+        }
+        .btn-hero:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,223,201,0.92));
+            color: #1d1a17; transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 32px rgba(0,0,0,0.2); border-color: rgba(255,255,255,1);
+        }
 
-/* Currículo - Amarelo forte */
-.btn-cv{background:linear-gradient(135deg,#facc15,#eab308) !important;color:#111 !important;border-color:#facc15 !important;box-shadow:0 4px 15px rgba(250,204,21,0.35)}
-.btn-cv:hover{background:linear-gradient(135deg,#fde047,#facc15) !important;box-shadow:0 0 25px rgba(250,204,21,0.6);color:#111 !important}
-.btn-cv::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);transform:translateX(-100%);transition:transform 0.6s}
-.btn-cv:hover::after{transform:translateX(100%)}
+        /* --- TÍTULOS GERAIS --- */
+        .section-title {
+            font-family: var(--font-alike); font-size: clamp(2.2rem, 3vw, 3rem); color: var(--cor-titulo); text-align: center; margin-bottom: 50px; letter-spacing: 0.02em; position: relative; display: inline-block; left: 50%; transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 72px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-destaque), #e7a362);
+            margin: 18px auto 0;
+            border-radius: 999px;
+        }
 
-/* WhatsApp - Verde vibrante com pulse */
-.btn-wa{background:linear-gradient(135deg,#25D366,#128C7E) !important;color:#fff !important;border-color:#25D366 !important;box-shadow:0 4px 15px rgba(37,211,102,0.4)}
-.btn-wa:hover{background:linear-gradient(135deg,#2ee66e,#25D366) !important;box-shadow:0 0 28px rgba(37,211,102,0.7)}
-.btn-wa{animation:waPulse 2.4s ease-in-out infinite}
-@keyframes waPulse{0%,100%{box-shadow:0 4px 15px rgba(37,211,102,0.4)}50%{box-shadow:0 4px 25px rgba(37,211,102,0.8)}}
+        /* --- PROJETOS GERAIS (HOME) --- */
+        .projects-section { padding: 100px 50px; max-width: 1400px; margin: 0 auto; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; overflow: visible; }
+        .project-card {
+            position: relative; height: 450px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 30px; cursor: pointer;
+            box-shadow: var(--sombra-mais-forte); border-radius: 22px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; animation: fadeUp 0.8s ease-out both;
+            border: 1px solid rgba(255,255,255,0.08); z-index: 1;
+        }
+        .project-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+            transition: box-shadow 0.35s ease;
+            pointer-events: none;
+        }
+        .project-card:hover {
+            transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: rgba(255,255,255,0.35); z-index: 10;
+        }
+        .project-card:hover::after {
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .project-card::before {
+            content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.1));
+            transition: filter 0.35s ease;
+        }
+        .project-card:hover::before {
+            filter: saturate(1.15) brightness(1.05);
+        }
+        .project-bg, .casacor-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; z-index: 0;
+        }
+        .project-card:hover .project-bg,
+        .casacor-card:hover .casacor-bg {
+            transform: scale(1.03);
+        }
+        .project-info { position: relative; z-index: 2; color: #fff; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+        .project-name { font-family: var(--font-alike); font-size: clamp(1.7rem, 2vw, 2.2rem); line-height: 1.1; font-weight: 400; }
 
-/* LinkedIn - Azul */
-.btn-in{background:linear-gradient(135deg,#0077b5,#005885) !important;color:#fff !important;border-color:#0077b5 !important;box-shadow:0 4px 15px rgba(0,119,181,0.4)}
-.btn-in:hover{background:linear-gradient(135deg,#0090d5,#0077b5) !important;box-shadow:0 0 25px rgba(0,119,181,0.65)}
+        .project-icon {
+            width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.9); border-radius: 50%; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.08);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1); transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+            backdrop-filter: blur(2px);
+        }
+        .project-card:hover .project-icon {
+            transform: translateY(-2px) scale(1.08) rotate(90deg);
+            background: rgba(255,255,255,0.14);
+            border-color: rgba(255,255,255,1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+        }
+        .project-icon svg {
+            width: 18px; height: 18px; stroke: #fff; stroke-width: 2.2; transition: transform 0.28s ease;
+        }
+        .project-card:hover .project-icon svg {
+            transform: scale(1.1);
+        }
 
-/* E-mail - Roxo/Indigo */
-.btn-em{background:linear-gradient(135deg,#4f46e5,#6366f1) !important;color:#fff !important;border-color:#818cf8 !important;box-shadow:0 4px 15px rgba(79,70,229,0.4)}
-.btn-em:hover{background:linear-gradient(135deg,#6366f1,#818cf8) !important;box-shadow:0 0 25px rgba(79,70,229,0.65)}
+        .project-card .project-bg,
+        .casacor-card .casacor-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+        }
+        .project-card:hover .project-bg,
+        .casacor-card:hover .casacor-bg {
+            transform: scale(1.03);
+        }
 
-/* GitHub - Escuro com destaque */
-.btn-gh{background:linear-gradient(135deg,#24292e,#1a1d21) !important;color:#fff !important;border-color:#444 !important;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
-.btn-gh:hover{background:linear-gradient(135deg,#2f363d,#24292e) !important;box-shadow:0 0 20px rgba(255,255,255,0.2);border-color:#666 !important}
+        /* --- CASACOR (EDIÇÕES ANTERIORES) --- */
+        .casacor-section { padding: 100px 50px; background: linear-gradient(180deg, #e7dcc7 0%, #e0d0b8 100%); }
+        .casacor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; overflow: visible; }
+        .casacor-card {
+            position: relative; height: 400px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 40px; cursor: pointer; overflow: hidden; border-radius: 18px;
+            box-shadow: var(--sombra-mais-forte); transition: transform 0.4s ease, box-shadow 0.4s ease; animation: fadeUp 0.9s ease-out both; border: 1px solid rgba(255,255,255,0.06); z-index: 1;
+        }
+        .casacor-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+            transition: box-shadow 0.35s ease;
+            pointer-events: none;
+        }
+        .casacor-card:hover {
+            transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: rgba(255,255,255,0.26); z-index: 10;
+        }
+        .casacor-card:hover::after {
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.12), 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .casacor-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.86), rgba(0,0,0,0.3), transparent); }
+        .casacor-info { position: relative; z-index: 2; color: #fff; }
+        .casacor-year { font-size: 14px; text-transform: uppercase; letter-spacing: 2.2px; margin-bottom: 10px; display: block; font-weight: 700; }
+        .casacor-title { font-family: var(--font-alike); font-size: 32px; margin-bottom: 15px; }
 
-.hero-img{position:relative}
-.foto{width:280px;height:280px;border-radius:50%;object-fit:cover;border:2px solid var(--borda);position:relative;z-index:2;transition:transform 0.5s ease}
-.foto:hover{transform:scale(1.04)}
-.glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:var(--amarelo);filter:blur(80px);opacity:0.15;z-index:1;border-radius:50%;animation:glowPulse 4s ease-in-out infinite}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
-.stats h2{font-size:42px;color:var(--amarelo-claro);margin:0 0 5px 0}
-.stats p{color:var(--cinza);margin:0;font-size:14px;font-weight:600}
-.titulo{font-size:28px;margin-bottom:30px;display:flex;align-items:center;gap:10px}
-.sobre-box{background:rgba(26,28,35,0.7);border:1px solid var(--borda);padding:25px;border-radius:16px;margin-bottom:20px;transition:transform 0.3s,border-color 0.3s}
-.sobre-box:hover{transform:translateY(-4px);border-color:rgba(250,204,21,0.3)}
-.sobre-box h3{color:var(--amarelo-claro);margin-top:0}
-.sobre-box p{margin:0;color:var(--cinza)}
-.grid-proj{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
-.card{background:rgba(34,37,45,0.9);border:1px solid var(--borda);border-radius:20px;overflow:hidden;cursor:pointer;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;backdrop-filter:blur(2px);position:relative}
-.card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:2px;background:linear-gradient(135deg,transparent,transparent);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:0.4s}
-.card:hover{transform:translateY(-10px);border-color:transparent;box-shadow:0 20px 40px rgba(0,0,0,0.45)}
-.card:hover::before{background:linear-gradient(135deg,#facc15,#eab308,#fde047)}
-.card:nth-child(2):hover::before{background:linear-gradient(135deg,#25D366,#128C7E)}
-.card:nth-child(3):hover::before{background:linear-gradient(135deg,#0077b5,#005885)}
-.card:nth-child(4):hover::before{background:linear-gradient(135deg,#4f46e5,#6366f1)}
-.card:nth-child(5):hover::before{background:linear-gradient(135deg,#f43f5e,#ec4899)}
-.card img{width:100%;height:250px;object-fit:cover;border-bottom:1px solid var(--borda);transition:transform 0.5s}
-.card:hover img{transform:scale(1.05)}
-.card-body{padding:30px;flex:1;display:flex;flex-direction:column}
-.card-body h3{margin:0 0 10px 0;font-size:22px}
-.card-body p{font-size:15px;color:var(--cinza);flex:1;margin-bottom:20px}
-.card-link{color:var(--amarelo-claro);font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px;transition:gap 0.3s}
-.card:hover .card-link{gap:14px}
-.skills{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.skill{background:rgba(26,28,35,0.8);border:1px solid rgba(250,204,21,0.3);color:var(--amarelo-claro);padding:10px 20px;border-radius:50px;font-size:15px;font-weight:600;transition:all 0.3s}
-.skill:hover{background:rgba(250,204,21,0.15);transform:translateY(-3px);border-color:var(--amarelo)}
+        /* --- SOBRE --- */
+        .about-section { padding: 100px 50px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+        .profile-img { width: 100%; max-width: 400px; border-radius: 50%; border: 5px solid var(--cor-header); aspect-ratio: 1/1; object-fit: cover; box-shadow: var(--sombra-suave); }
+        .about-text h2 { font-family: var(--font-alike); font-size: clamp(2.3rem, 3.6vw, 3rem); color: var(--cor-titulo); margin-bottom: 30px; line-height: 1.1; }
+        .about-text p { font-size: 16px; line-height: 1.85; margin-bottom: 15px; }
+        .about-text strong {
+            color: var(--cor-titulo);
+            transition: color 0.2s ease;
+        }
+        .about-text strong:hover { color: var(--cor-destaque); }
 
-/* RODAPÉ ATUALIZADO */
-.footer{text-align:center;padding:60px 20px;border-radius:24px;border:1px solid var(--borda);margin-top:20px;position:relative;z-index:2}
-.footer h2{font-size:26px}
-.footer p{color:var(--cinza);margin-bottom:30px}
-.email-link{display:block;margin-top:30px;font-size:18px;color:var(--cinza);text-decoration:none}
-.email-link:hover{color:var(--amarelo)}
+        /* --- RODAPÉ --- */
+        .footer { padding: 80px 50px 30px; background: linear-gradient(180deg, #47382f 0%, #2f231f 100%); color: #faefe0; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer h3 { font-family: var(--font-alike); font-size: clamp(2.2rem, 3vw, 2.8rem); margin-bottom: 30px; grid-column: 1 / -1; color: #faefe0; }
+        .footer-col h4 { font-family: var(--font-opensans); font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .footer-col a, .footer-col p { display: block; margin-bottom: 10px; font-size: 15px; color: #faefe0; opacity: 0.82; transition: transform 0.25s ease, opacity 0.25s ease, text-shadow 0.25s ease, color 0.25s ease; }
+        .footer-col a:hover {
+            opacity: 1; text-decoration: underline; transform: translateX(2px) scale(1.01); color: #fffaf3; text-shadow: 0 6px 18px rgba(255,255,255,0.12);
+        }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(250, 239, 224, 0.2); font-size: 13px; }
 
-.pagina{display:none;background:transparent;min-height:100vh;padding-top:100px;padding-bottom:80px;position:relative;z-index:2}
-.pagina-content{max-width:900px;margin:0 auto;padding:0 20px;background:rgba(34,37,45,0.85);border-radius:24px;padding:40px;border:1px solid var(--borda);backdrop-filter:blur(4px)}
-.btn-voltar{display:inline-flex;align-items:center;background:var(--card);color:var(--texto);padding:12px 24px;border-radius:50px;cursor:pointer;margin-bottom:40px;border:1px solid var(--borda);font-weight:600;transition:0.3s}
-.btn-voltar:hover{background:var(--amarelo);color:#111}
-.pagina h1{font-size:38px;color:var(--amarelo-claro);margin-bottom:25px}
-.pagina h4{font-size:22px;margin-top:40px;border-bottom:1px solid var(--borda);padding-bottom:8px}
-.pagina p,.pagina ul{color:var(--cinza);font-size:17px}
-.cv-box{background:var(--card);padding:50px;border-radius:16px;border:1px solid var(--borda);box-shadow:0 10px 30px rgba(0,0,0,0.2);position:relative}
-.cv-box h1{text-align:center;font-size:32px;color:var(--texto);margin:0 0 5px 0}
-.cv-box h2{color:var(--amarelo-claro);font-size:18px;border-bottom:2px solid var(--amarelo);padding-bottom:5px;margin-top:35px;text-transform:uppercase;letter-spacing:1px}
-.cv-box h3{color:var(--texto);font-size:18px;margin-bottom:5px;margin-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap}
-.cv-box p{margin-bottom:10px;color:var(--cinza)}
-.cv-box ul{margin-top:5px;margin-bottom:20px;padding-left:20px;color:var(--cinza)}
-.cv-box li{margin-bottom:8px}
-.cv-box strong{color:var(--texto)}
-.cv-sub{text-align:center;font-size:16px;color:var(--cinza);margin-bottom:30px}
-.cv-data{font-size:14px;color:var(--cinza);font-weight:normal}
-.btn-download{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--amarelo);color:#111;font-weight:700;padding:15px;border-radius:8px;text-decoration:none;margin-bottom:30px;transition:0.3s;font-size:16px}
-.btn-download:hover{background:var(--amarelo-claro);transform:translateY(-3px)}
-.imgs{display:flex;flex-direction:column;gap:40px;margin-top:50px}
-.imgs img{width:100%;border-radius:12px;border:1px solid var(--borda);cursor:zoom-in;transition:transform 0.3s}
-.imgs img:hover{transform:scale(1.02)}
-.lightbox{display:none;position:fixed;z-index:2000;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;cursor:zoom-out}
-.lightbox img{max-width:95%;max-height:95vh;border-radius:12px}
+        /* --- BOTÕES FLUTUANTES --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: linear-gradient(180deg, #37dc72 0%, #1eb85d 100%); width: 78px; height: 78px; border-radius: 50%; display: flex;
+            flex-direction: column; justify-content: center; align-items: center; color: white; box-shadow: 0 16px 30px rgba(25, 126, 72, 0.22); z-index: 1000; cursor: pointer; text-align: center;
+            font-size: 11px; font-family: var(--font-opensans); font-weight: 600; line-height: 1.2; transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+            animation: pulseGlow 3.2s ease-in-out infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .whatsapp-float:hover {
+            transform: translateY(-4px) scale(1.05); box-shadow: 0 20px 38px rgba(25, 126, 72, 0.28); filter: brightness(1.05);
+        }
+        .whatsapp-float svg { width: 26px; height: 26px; fill: white; margin-bottom: 3px; }
+        .lang-float {
+            position: fixed; bottom: 30px; right: 120px; background: linear-gradient(135deg, rgba(135, 101, 78, 0.96), rgba(98, 74, 58, 0.98)); padding: 12px 18px; color: white; border-radius: 999px; display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-opensans); font-size: 14px; z-index: 1000; cursor: pointer; box-shadow: 0 12px 24px rgba(60, 45, 35, 0.22); border: 1px solid rgba(255,255,255,0.18);
+            transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+        }
+        .lang-float:hover {
+            transform: translateY(-2px) scale(1.03); box-shadow: 0 16px 28px rgba(60, 45, 35, 0.26); filter: brightness(1.04);
+        }
 
-@media (max-width:900px){
-    .hero{flex-direction:column-reverse;text-align:center}
-    .botoes{justify-content:center}
-    .cv-box{padding:25px}
-    .grid-proj{grid-template-columns:1fr}
-    .stats{grid-template-columns:1fr 1fr;gap:15px;text-align:center}
-    .stats h2{font-size:32px}
-    .stats p{font-size:12px}
-}
-</style>
+        /* --- PÁGINA DO PROJETO ABERTA --- */
+        .project-page { display: none; background-color: var(--cor-fundo); min-height: 100vh; padding-bottom: 100px; }
+        .project-page-hero {
+            width: 100%; height: 420px; background-image: url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; position: relative;
+            animation: fadeUp 0.7s ease-out both;
+        }
+        .project-page-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
+        }
+        .project-page-content { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        .project-page-title { font-family: var(--font-alike); font-size: clamp(2.5rem, 4vw, 3.4rem); color: var(--cor-titulo); text-align: center; margin-bottom: 60px; font-weight: normal; }
+        .project-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start; }
+        .project-text { font-family: var(--font-opensans); font-size: 16px; line-height: 1.9; color: var(--cor-texto); }
+        .project-text p { margin-bottom: 25px; }
+        .project-text strong { font-weight: 700; }
+        .project-image-large { width: 100%; height: auto; object-fit: cover; box-shadow: 0 18px 35px rgba(41, 24, 17, 0.12); border-radius: 18px; }
+        .btn-voltar { display: inline-block; margin-bottom: 30px; font-family: var(--font-opensans); color: var(--cor-titulo); font-weight: 700; cursor: pointer; border: none; background: none; font-size: 16px; letter-spacing: 0.04em; }
+        .btn-voltar:hover { text-decoration: underline; }
+
+        @media (max-width: 900px) {
+            .project-layout, .about-section, .footer-container { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 20px; padding: 20px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 12px 20px; }
+            .search-container { width: min(100%, 320px); }
+            .hero { padding-left: 20px; padding-right: 20px; height: auto; min-height: 540px; }
+            .hero-box { padding: 32px 26px; margin-right: 0; width: 100%; }
+            .project-page-title { font-size: 32px; }
+            .lang-float { display: none; }
+            .profile-img { margin: 0 auto; }
+            .project-card { height: 380px; }
+        }
+    </style>
 </head>
 <body>
-<canvas id="bg-canvas"></canvas>
-<div class="bg-grid"></div>
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <div class="logo" onclick="closeProject()">
+            RAMON
+            <span>arquitetura e interiores</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a onclick="closeProject()">Home</a></li>
+            <li><a onclick="closeProject()">Projetos</a></li>
+            <li><a onclick="closeProject()">Serviços</a></li>
+            <li><a onclick="closeProject()">Sobre</a></li>
+            <li><a onclick="closeProject()">Fale conosco</a></li>
+        </ul>
+        <div class="search-container">
+            <input type="text" placeholder="Pesquisar...">
+            <button><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+        </div>
+    </header>
 
-<div class="nav"><nav><a onclick="voltarInicio(true)">Início</a><a href="#sobre">Sobre</a><a href="#projetos">Projetos</a><a href="#habilidades">Habilidades</a></nav></div>
+    <!-- ========================================== -->
+    <!-- TELA 1: HOME (Site Principal) -->
+    <!-- ========================================== -->
+    <div id="home-screen">
+        
+        <section class="hero">
+            <div class="hero-box">
+                <h1 class="hero-title">Casarão Senta, Teresa!</h1>
+                <p class="hero-subtitle">Uma casa que guarda a memória de chegar e de voltar, assinada por Ramon na CASACOR Rio 2026. Cuidado com o degrau que não existe.</p>
+                <button class="btn-hero" onclick="openProject('Casarão Senta, Teresa!', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop')">MAIS DETALHES</button>
+            </div>
+        </section>
 
-<div id="tela-principal" class="container">
-<div class="box hero bg-hero">
-<div class="hero-text">
-<span class="anim anim-1" style="color:var(--amarelo-claro);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px">Olá, eu sou o Anderson!</span>
-<h1 class="anim anim-2">Construindo soluções em <span>Dados e Tecnologia.</span></h1>
-<p class="anim anim-3">Mais de 10 anos de experiência em TI, direcionando minha carreira para Análise de Dados e Business Intelligence.</p>
-<div class="botoes anim anim-4">
-<button class="btn btn-cv" onclick="abrirPagina('curriculo')"><i class="fas fa-file-alt"></i> Currículo</button>
-<a class="btn btn-wa" href="https://wa.me/5521979388819" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-<a class="btn btn-in" href="https://www.linkedin.com/in/andersonrdo/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-<a class="btn btn-em" href="mailto:anderson_rdo@hotmail.com"><i class="fas fa-envelope"></i> E-mail</a>
-<a class="btn btn-gh" href="https://github.com/anderson123451" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-</div>
-</div>
-<div class="hero-img anim anim-5"><div class="glow"></div><img src="Imagens/foto_perfil/foto_perfil.jpg" class="foto" alt="Anderson"></div>
-</div>
+        <section class="projects-section">
+            <h2 class="section-title">Projetos Sem Sentido</h2>
+            <div class="projects-grid">
+                
+                <!-- Projeto 1 -->
+                <div class="project-card" onclick="openProject('Projeto Piscina no Teto', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="project-bg" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" alt="Projeto Piscina no Teto">
+                    <div class="project-info">
+                        <div class="project-name">Projeto Piscina no Teto</div>
+                        <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    </div>
+                </div>
 
-<div class="box stats">
-<div><h2>10+</h2><p>Anos de Experiência</p></div>
-<div><h2>SQL</h2><p>Bancos de Dados</p></div>
-<div><h2>BI</h2><p>Power BI & Analytics</p></div>
-<div><h2>N2</h2><p>Sustentação de TI</p></div>
-</div>
+                <!-- Projeto 2 -->
+                <div class="project-card" onclick="openProject('Casa do Vento Invertido', 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="project-bg" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" alt="Casa do Vento Invertido">
+                    <div class="project-info">
+                        <div class="project-name">Casa do Vento Invertido</div>
+                        <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    </div>
+                </div>
 
-<div class="box" id="sobre">
-<div class="titulo"><i class="fas fa-user-tie" style="color:var(--amarelo-claro)"></i> Sobre Mim</div>
-<div class="sobre-box">
-<h3>💼 Minha Trajetória em Tecnologia</h3>
-<p>Construí minha trajetória profissional ao longo de mais de 10 anos em Tecnologia da Informação, atuando com sustentação de sistemas corporativos, análise e resolução de incidentes e bancos de dados SQL Server. Essa experiência fortaleceu minha capacidade analítica, atenção à qualidade das informações e compreensão dos desafios operacionais e das necessidades do negócio.</p>
-</div>
-<div class="sobre-box">
-<h3>📊 Minha Jornada em Dados e Business Intelligence</h3>
-<p>Atualmente, direciono minha experiência em tecnologia para a área de Dados, com foco em Business Intelligence e análise de informações. Desenvolvo conhecimentos em Power BI, SQL, modelagem de dados, DAX e Power Query, buscando transformar dados brutos em informações estruturadas, indicadores relevantes e visualizações que facilitem a interpretação dos resultados.</p>
-</div>
-<div class="sobre-box">
-<h3>🎯 Meu Objetivo Profissional</h3>
-<p>Meu objetivo é unir experiência prática em TI, raciocínio analítico e visão de negócio para desenvolver dashboards e soluções de BI que apoiem a tomada de decisão. Busco oportunidades em Análise de Dados e Business Intelligence nas quais possa contribuir com minha bagagem técnica, evoluir continuamente e gerar valor por meio dos dados.</p>
-</div>
-</div>
+                <!-- Projeto 3 -->
+                <div class="project-card" onclick="openProject('Porta para Lugar Nenhum', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="project-bg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Porta para Lugar Nenhum">
+                    <div class="project-info">
+                        <div class="project-name">Porta para Lugar Nenhum</div>
+                        <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    </div>
+                </div>
 
-<div id="projetos">
-<div class="titulo"><i class="fas fa-briefcase" style="color:var(--amarelo-claro)"></i> Projetos e Experiências</div>
-<div class="grid-proj">
-<div class="card" onclick="abrirPagina('suporte')"><img src="Imagens/imagens_capa/imagemSuporte.jpg" alt="Suporte"><div class="card-body"><h3>Sustentação de TI & SQL</h3><p>+10 anos resolvendo incidentes, garantindo estabilidade de sistemas e administrando bancos de dados críticos.</p><div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div></div></div>
-<div class="card" onclick="abrirPagina('netflix')"><img src="Imagens/imagens_capa/imagemNetflix.jpg" alt="Netflix"><div class="card-body"><h3>Análise de Dados (Netflix)</h3><p>Pipeline completo de ETL com Python (Pandas) e criação de dashboard interativo no Power BI.</p><div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div></div></div>
-<div class="card" onclick="abrirPagina('gastronomia')"><img src="Imagens/imagens_capa/ImagemGastronomia.jpg" alt="Gastronomia"><div class="card-body"><h3>Setor Gastronômico Niterói</h3><p>Mapeamento do mercado de restaurantes locais, analisando densidade comercial e maturidade digital.</p><div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div></div></div>
-<div class="card" onclick="abrirPagina('arquitetura')"><img src="Imagens/imagens_capa/imagemArquitetura.jpg" alt="Arquitetura"><div class="card-body"><h3>Canal de Arquitetura</h3><p>Estudo de caso sobre eficiência de postagens em um canal do YouTube, descobrindo o melhor retorno por vídeo.</p><div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div></div></div>
-<div class="card" onclick="abrirPagina('tiktok')"><img src="Imagens/imagens_capa/imagemTiktok.jpg" alt="TikTok"><div class="card-body"><h3>Análise de Dados (TikTok)</h3><p>Análise completa de um canal, incluindo simulação de dados com Python, ETL e dashboard no Power BI.</p><div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div></div></div>
-</div>
-</div>
+            </div>
+        </section>
 
-<div class="box" id="habilidades">
-<div class="titulo"><i class="fas fa-microchip" style="color:var(--amarelo-claro)"></i> Habilidades Técnicas</div>
-<div class="skills">
-<span class="skill">Suporte e Sustentação de TI</span>
-<span class="skill">SQL Server</span>
-<span class="skill">Power BI</span>
-<span class="skill">DAX & Power Query</span>
-<span class="skill">Modelagem de Dados</span>
-<span class="skill">Análise de Dados</span>
-</div>
-</div>
+        <section class="casacor-section">
+            <h2 class="section-title">Projetos CasaCor Rio (O Caos)</h2>
+            <div class="casacor-grid">
+                
+                <div class="casacor-card" onclick="openProject('Parede de Gelatina', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="casacor-bg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" alt="Parede de Gelatina">
+                    <div class="casacor-info">
+                        <span class="casacor-year">CASACOR Rio 2026</span>
+                        <h3 class="casacor-title">Parede de Gelatina</h3>
+                        <p>Living de 75 m² (que derreteu)</p>
+                    </div>
+                </div>
 
-<div class="footer bg-footer">
-<h2>Vamos conversar?</h2>
-<p>Estou disponível para oportunidades em Suporte de TI e Análise de Dados.</p>
-<div class="botoes" style="justify-content:center">
-<button class="btn btn-cv" onclick="abrirPagina('curriculo')"><i class="fas fa-file-alt"></i> Currículo</button>
-<a class="btn btn-em" href="mailto:anderson_rdo@hotmail.com"><i class="fas fa-envelope"></i> Enviar E-mail</a>
-<a class="btn btn-wa" href="https://wa.me/5521979388819" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-</div>
-<a href="mailto:anderson_rdo@hotmail.com" class="email-link"><i class="fas fa-envelope"></i> anderson_rdo@hotmail.com</a>
-</div>
-</div>
-<div id="pagina-curriculo" class="pagina">
-<div class="pagina-content">
-<div class="btn-voltar" onclick="voltarInicio(true)">← Voltar para o Portfólio</div>
-<div class="cv-box">
-<a href="https://drive.google.com/uc?export=download&id=15uO4079u1ArXHdgCTy6jxTSyw0wliKfA" class="btn-download" target="_blank"><i class="fas fa-download"></i> Baixar Currículo em PDF</a>
-<h1>ANDERSON RÊGO DE OLIVEIRA</h1>
-<p class="cv-sub">Analista de Dados | Power BI | SQL | Python | Business Intelligence<br>Niterói - RJ • (21) 97938-8819 • anderson_rdo@hotmail.com</p>
-<h2>RESUMO PROFISSIONAL</h2>
-<p>Analista de Dados com mais de 10 anos de experiência em Tecnologia da Informação, com sólida atuação em sustentação de sistemas críticos e administração de bancos de dados SQL Server. Especialista em Power BI para criação de dashboards, relatórios interativos e modelagem de dados, com certificação concluída pela Udemy. Experiência em análise de dados, ETL, transformação e visualização de dados para suporte à tomada de decisão data-driven. Domínio de SQL avançado, Python (Pandas, NumPy) e fundamentos de Machine Learning.</p>
-<h2>EXPERIÊNCIA PROFISSIONAL</h2>
-<h3>Soma Tecnologia — Analista / Assistente Técnico <span class="cv-data">2013 – 2025</span></h3>
-<ul><li>Sustentação de sistemas corporativos em ambiente produtivo de alta disponibilidade</li><li>Administração e manutenção de bancos de dados SQL Server: queries, stored procedures e análise de dados</li><li>Análise e resolução de incidentes técnicos (troubleshooting), com foco em disponibilidade e performance</li><li>Validação, extração e análise de dados via SQL para suporte à tomada de decisão</li><li>Monitoramento de serviços e garantia de SLA em ambientes produtivos</li></ul>
-<h2>FORMAÇÃO ACADÊMICA</h2>
-<h3>Bacharelado em Sistemas de Informação — Estácio <span class="cv-data">2021</span></h3>
-<h2>CERTIFICAÇÕES</h2>
-<ul><li><strong>Power BI – Do Básico ao Avançado | Udemy (Concluído)</strong></li><li><strong>Machine Learning aplicado a dados | Kaggle (em andamento)</strong></li></ul>
-<h2>HABILIDADES TÉCNICAS</h2>
-<ul><li><strong>Power BI:</strong> dashboards, relatórios interativos, modelagem de dados, DAX, Power Query</li><li><strong>SQL Server:</strong> consultas complexas, JOIN, subqueries, procedures</li><li><strong>Python:</strong> Pandas, NumPy, Matplotlib, Seaborn</li><li><strong>Outros:</strong> Excel avançado, Git, IA generativa (ChatGPT, Gemini, Grok)</li></ul>
-</div>
-</div>
-</div>
+                <div class="casacor-card" onclick="openProject('Chão de Nuvem', 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="casacor-bg" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" alt="Chão de Nuvem">
+                    <div class="casacor-info">
+                        <span class="casacor-year">CASACOR Rio 2025</span>
+                        <h3 class="casacor-title">Chão de Nuvem</h3>
+                        <p>Living flutuante de 104 m²</p>
+                    </div>
+                </div>
 
-<div id="pagina-suporte" class="pagina">
-<div class="pagina-content">
-<div class="btn-voltar" onclick="voltarInicio(true)">← Voltar</div>
-<h1>💻 Sustentação de TI & SQL Server</h1>
-<p>Com mais de 10 anos de experiência na área de Tecnologia da Informação, construí uma carreira sólida não apenas resolvendo problemas técnicos, mas garantindo que a tecnologia fosse uma aliada estratégica para o negócio.</p>
-<h4>🛠️ O que eu fazia (Atividades Técnicas)</h4>
-<ul><li><strong>Suporte e Sustentação (N1 e N2):</strong> Atendimento a usuários, investigação de incidentes complexos em sistemas corporativos e resolução de problemas em ambiente de produção.</li><li><strong>Administração de Banco de Dados (SQL Server):</strong> Criação de consultas SQL para extração de dados estratégicos, análise de integridade e suporte a sistemas críticos.</li><li><strong>Análise de Causa Raiz (RCA):</strong> Investigação profunda de erros recorrentes para evitar que o mesmo problema voltasse a acontecer.</li><li><strong>Gestão de SLAs:</strong> Atendimento focado em prazos e na comunicação clara com o usuário final.</li></ul>
-<h4>📈 Como isso ajudava a empresa (Impacto no Negócio)</h4>
-<ul><li><strong>Redução de Downtime (Paradas):</strong> Ao resolver incidentes rapidamente e investigar a causa raiz, eu evitava que a empresa perdesse produtividade e dinheiro com sistemas fora do ar.</li><li><strong>Tomada de Decisão Rápida:</strong> Minhas consultas em SQL Server permitiam que gestores tivessem acesso rápido a relatórios e dados, ajudando na tomada de decisões diárias.</li><li><strong>Estabilidade dos Sistemas:</strong> A sustentação proativa garantia que as aplicações que geravam receita ou atendiam clientes continuassem funcionando perfeitamente.</li><li><strong>Foco no Usuário:</strong> O suporte empático e eficiente reduzia a frustração das equipes, permitindo que eles focassem no que realmente importa: o core business da empresa.</li></ul>
-<h4>🚀 A Ponte para Dados</h4>
-<p>Essa vivência técnica é o alicerce da minha transição para Dados. <strong>Quem passa 10 anos resolvendo problemas reais de negócio, olhando para bancos de dados e ouvindo as dores dos usuários, não cria dashboards apenas com números bonitos</strong>. Cria soluções que realmente respondem às necessidades da empresa, unindo a visão técnica à visão de negócio.</p>
-</div>
-</div>
+                <div class="casacor-card" onclick="openProject('Privada de Espelhos', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="casacor-bg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Privada de Espelhos">
+                    <div class="casacor-info">
+                        <span class="casacor-year">CASACOR Rio 2024</span>
+                        <h3 class="casacor-title">Privada de Espelhos</h3>
+                        <p>Estúdio de 54 m² (labirinto)</p>
+                    </div>
+                </div>
 
-<div id="pagina-netflix" class="pagina">
-<div class="pagina-content">
-<div class="btn-voltar" onclick="voltarInicio(true)">← Voltar</div>
-<h1>🚀 Meu primeiro projeto completo de ETL + BI!</h1>
-<p><strong>⚠️ Importante:</strong> Os dados utilizados foram GERADOS POR INTELIGÊNCIA ARTIFICIAL exclusivamente para fins de estudo e prática. Não se tratam de dados reais da Netflix.</p>
-<h4>🐍 ETAPA 1 - PYTHON (PANDAS)</h4>
-<p>Nesta etapa, realizei todo o processo de limpeza e transformação dos dados:</p>
-<ul><li>✅ Carregamento e exploração inicial dos dados</li><li>✅ Identificação de valores negativos (-999, -10.0)</li><li>✅ Substituição de valores negativos por NaN (nulos)</li><li>✅ Tratamento de placeholders numéricos (99.99, 3.2878...)</li><li>✅ Correção de categorias inválidas ("Desconhecido", "Unknown")</li><li>✅ Padronização de nomes de países ("Reino Unido" → "UK")</li><li>✅ Substituição de valores nulos pela MÉDIA das respectivas colunas</li><li>✅ Exportação dos dados limpos para um novo arquivo CSV</li></ul>
-<h4>📊 ETAPA 2 - POWER BI</h4>
-<p>Com os dados já tratados, parti para a visualização:</p>
-<ul><li>✅ Conexão com o arquivo CSV limpo</li><li>✅ Criação de matriz de gasto mensal por país</li><li>✅ Formatação e padronização dos visuais</li><li>✅ Criação de métricas e indicadores</li><li>✅ Desenvolvimento do dashboard interativo</li></ul>
-<h4>📈 RESULTADO DO ESTUDO</h4>
-<p>Os dados simulados apontaram os seguintes mercados como maiores em receita:</p>
-<ul><li>🥇 USA: R$ 289.849,90</li><li>🥈 Brasil: R$ 163.936,40</li><li>🥉 França: R$ 119.327,90</li></ul>
-<p><strong>Receita total simulada: R$ 1.204.364,20</strong></p>
-<h4>🎓 APRENDIZAGENS</h4>
-<p>Este primeiro projeto me ensinou:</p>
-<ul><li>🔹 A importância da limpeza de dados antes da análise</li><li>🔹 Como identificar e tratar valores inconsistentes</li><li>🔹 ETL completo utilizando Python (Pandas)</li><li>🔹 Criação de visualizações profissionais com Power BI</li><li>🔹 Storytelling com dados para tomada de decisão</li></ul>
-<div class="imgs"><img src="Imagens/Netflix/foto1.jfif" alt="Dashboard Netflix" onclick="abrirLightbox(this.src)"></div>
-</div>
-</div>
+            </div>
+        </section>
 
-<div id="pagina-gastronomia" class="pagina">
-<div class="pagina-content">
-<div class="btn-voltar" onclick="voltarInicio(true)">← Voltar</div>
-<h1>📊 Transformando Dados em Insights: Análise do Setor Gastronômico de Niterói</h1>
-<p>Recentemente, decidi aplicar meus estudos de Power BI em um cenário real e local: mapear o mercado de restaurantes e lanchonetes em Niterói/RJ. O objetivo foi entender a densidade comercial por bairro e o nível de maturidade digital desses negócios.</p>
-<p>Neste projeto, trabalhei as seguintes etapas:</p>
-<ul><li><strong>ETL (Power Query):</strong> Limpeza e tratamento dos dados para padronizar nomes de bairros e categorias de estabelecimentos.</li><li><strong>Modelagem:</strong> Criação de colunas condicionais e medidas para identificar a conectividade via WhatsApp.</li><li><strong>Data Viz:</strong> Construção de dashboards focados em facilitar a leitura geográfica e o perfil do setor.</li></ul>
-<h4>🔎 Principais Insights:</h4>
-<ul><li><strong>Concentração:</strong> O eixo Icaraí-Centro concentra quase 50% do mercado gastronômico mapeado.</li><li><strong>Oportunidade Digital:</strong> Notei que metade dos estabelecimentos ainda não utiliza (ou não informa) o WhatsApp, o que indica um enorme campo para serviços de tecnologia e automação de atendimento.</li></ul>
-<p>Estou em transição de carreira para Análise de Dados, unindo minha experiência de mais de 10 anos em infraestrutura e SQL com novas ferramentas de Business Intelligence. Cada projeto é um passo importante nessa jornada de aprendizado contínuo.</p>
-<p>O que acharam da visualização? Aceito feedbacks e sugestões para os próximos dashboards! 🚀</p>
-<div class="imgs">
-<img src="Imagens/Setor_Gastronomico/foto1.jfif" alt="Gastronomia 1" onclick="abrirLightbox(this.src)">
-<img src="Imagens/Setor_Gastronomico/foto2.jfif" alt="Gastronomia 2" onclick="abrirLightbox(this.src)">
-<img src="Imagens/Setor_Gastronomico/foto3.jfif" alt="Gastronomia 3" onclick="abrirLightbox(this.src)">
-<img src="Imagens/Setor_Gastronomico/foto4.jfif" alt="Gastronomia 4" onclick="abrirLightbox(this.src)">
-<img src="Imagens/Setor_Gastronomico/foto5.jfif" alt="Gastronomia 5" onclick="abrirLightbox(this.src)">
-</div>
-</div>
-</div>
+        <section class="about-section">
+            <img src="foto_perfil.png" alt="Ramon" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop'">
+            <div class="about-text">
+                <h2>Sobre o Ramon</h2>
+                <p>O <strong>Ramon</strong> é arquiteto e designer de interiores do Rio de Janeiro, formado pela Faculdade de Arquitetura e Urbanismo da UFRJ (mas ele não lembra de nada do que estudou).</p>
+                <p>Ele dirige o escritório <strong>Ramon Arquitetura e Design do Absurdo</strong>, instalado em um contêiner abandonado no meio da Barra da Tijuca, Rio de Janeiro.</p>
+                <p><strong>Fundado em 2005</strong>, atua nos segmentos <strong>residencial</strong> (onde as portas não fecham) e <strong>comercial</strong> (onde ninguém quer entrar). Também desenvolve conceitos e projetos de stands e espaços de relacionamento para <strong>empreendimentos imobiliários que faliram.</strong></p>
+            </div>
+        </section>
 
-<div id="pagina-arquitetura" class="pagina">
-<div class="pagina-content">
-<div class="btn-voltar" onclick="voltarInicio(true)">← Voltar</div>
-<h1>📈 Análise de Desempenho: Canal de Arquitetura</h1>
-<p>Estudando análise de dados, resolvi aplicar o que venho aprendendo em um caso real: um amigo que cuida da postagem de vídeos de um canal de arquitetura me pediu ajuda para entender o desempenho do último ano — ele estava se preparando para pedir um aumento.</p>
-<p>Os dados que recebi eram simples: uma planilha com visualizações, curtidas, comentários e compartilhamentos, dia a dia, ao longo de 12 meses.</p>
-<p>O primeiro passo foi só organizar isso: somar tudo mês a mês. Só com esse agrupamento, já deu pra ver a evolução ao longo do ano — inclusive um mês que viralizou bem acima da média.</p>
-<p>Mas ao olhar só o total de views por mês, a conclusão parecia ruim: os últimos meses tinham views bem mais baixas que o pico. Ia parecer que o canal estava perdendo força.</p>
-<p>Foi aí que fiz uma pergunta simples: "e se esses meses tiveram menos vídeos postados?" Pedi essa informação e cruzei com o que já tinha. O resultado mudou completamente: dividindo views pelo número de vídeos postados, os meses "fracos" na verdade tinham a MELHOR eficiência por vídeo do ano — o canal estava postando menos, mas cada vídeo individual estava performando cada vez melhor.</p>
-<p>Nenhum comando avançado, nenhum modelo. Só soma, divisão e uma pergunta certa na hora certa.</p>
-<p>O que eu aprendi com esse caso, ainda no início dos meus estudos: análise de dados não é sobre usar o comando mais complexo ou montar o gráfico com mais informação possível. É sobre responder a pergunta que realmente importa — e às vezes o básico, bem aplicado, já resolve.</p>
-<p>Deixo a pergunta pra vocês que já trabalham com dados: vocês já viveram uma situação parecida, em que um dado simples (ou uma pergunta simples) mudou completamente a conclusão de uma análise?</p>
-<div class="imgs">
-<img src="Imagens/graficos _arquitetura/foto1.jpg" alt="Arquitetura 1" onclick="abrirLightbox(this.src)">
-<img src="Imagens/graficos _arquitetura/foto2.jpg" alt="Arquitetura 2" onclick="abrirLightbox(this.src)">
-<img src="Imagens/graficos _arquitetura/foto3.jpg" alt="Arquitetura 3" onclick="abrirLightbox(this.src)">
-<img src="Imagens/graficos _arquitetura/foto4.jpg" alt="Arquitetura 4" onclick="abrirLightbox(this.src)">
-</div>
-</div>
-</div>
+    </div>
 
-<div id="pagina-tiktok" class="pagina">
-<div class="pagina-content">
-<div class="btn-voltar" onclick="voltarInicio(true)">← Voltar</div>
-<h1>📱 Análise de Dados de um Canal do TikTok</h1>
-<p>🚀 Concluí mais um projeto de estudo: uma análise completa de dados de um canal do TikTok!</p>
-<p>Ainda estou no início dos meus estudos na área de dados, e este projeto foi um grande desafio para mim. Depois do projeto da Netflix, queria praticar algo mais completo, que incluísse desde a geração dos dados até o dashboard.</p>
-<p>O que mais aprendi? Que a limpeza e preparação dos dados (ETL) é a parte mais trabalhosa, mas também a mais importante. Foi onde mais errei e mais aprendi.</p>
-<h4>🎯 O que eu fiz (como estudante):</h4>
-<ul>
-<li><strong>Simulei Dados com Python 🐍:</strong> Criei 3 tabelas (Canal, Vídeos, Comentários) com valores faltantes e inconsistências de propósito, para treinar como resolver problemas reais.</li>
-<li><strong>ETL na Prática 🧹:</strong> Tratei valores vazios (descrições, localização, centenas de comentários), padronizei datas e horários e renomeei colunas para português.</li>
-<li><strong>Dashboard no Power BI 📊:</strong> Criei relacionamento entre as tabelas, medidas em DAX (aprendendo ainda!) e visuais interativos.</li>
-</ul>
-<h4>🔍 O que os dados me mostraram:</h4>
-<ul>
-<li><strong>Melhor dia para postar:</strong> Sábado (3,2 milhões de views)</li>
-<li><strong>Melhor horário:</strong> 18h - 21h</li>
-<li><strong>Vídeo mais visto:</strong> Vídeo 55 (3,2 milhões de views)</li>
-<li><strong>Taxa de engajamento:</strong> ~31%</li>
-</ul>
-<p>💡 <em>O que eu concluo com isso: postar aos Sábados entre 18h e 21h parece ser a melhor estratégia (pelos dados que gerei para estudar).</em></p>
-<h4>📚 O que tem no meu GitHub:</h4>
-<ul>
-<li>Código Python (notebooks)</li>
-<li>Dados brutos e tratados</li>
-<li>Arquivo .pbix do Power BI</li>
-<li>README com toda a documentação</li>
-</ul>
-<p>Ainda tenho muito o que aprender, principalmente em DAX e criação de medidas mais complexas. Mas estou feliz com a minha evolução e com o que consegui entregar neste projeto.</p>
-<p><strong>Feedbacks são muito bem-vindos! Estou aqui para aprender. 🙌</strong></p>
-<div class="imgs">
-    <img src="Imagens/tiktok_analise/imagem1.jpg" alt="Dashboard TikTok 1" onclick="abrirLightbox(this.src)">
-    <img src="Imagens/tiktok_analise/imagem2.jpg" alt="Dashboard TikTok 2" onclick="abrirLightbox(this.src)">
-</div>
-</div>
-</div>
+    <!-- ========================================== -->
+    <!-- TELA 2: PÁGINA DO PROJETO (Janela que abre) -->
+    <!-- ========================================== -->
+    <div id="project-screen" class="project-page">
+        <div class="project-page-hero"></div>
+        <div class="project-page-content">
+            
+            <button class="btn-voltar" onclick="closeProject()">← Voltar para Projetos</button>
+            <h1 class="project-page-title" id="pagina-titulo">Projeto</h1>
 
-<div id="lightbox" class="lightbox" onclick="fecharLightbox()"><img id="img-ampliada" src="" alt="Ampliada"></div>
+            <div class="project-layout">
+                <div class="project-text" id="pagina-texto">
+                    <!-- O texto será injetado pelo JavaScript -->
+                </div>
+                
+                <div>
+                    <img id="pagina-imagem" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1000&auto=format&fit=crop" alt="Foto do Projeto" class="project-image-large">
+                </div>
+            </div>
+        </div>
+    </div>
 
-<script>
-function abrirPagina(id) {
-    document.getElementById('tela-principal').style.display = 'none';
-    document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
-    document.getElementById('pagina-' + id).style.display = 'block';
-    window.scrollTo(0, 0);
-    history.pushState({ pagina: id }, '', '#' + id);
-}
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-container">
+            <h3>Fale Conosco</h3>
+            <div class="footer-col">
+                <h4>Entre em contato (se puder)</h4>
+                <a href="#">Via WhatsApp - (21) 99999-9999</a>
+                <a href="#">ramon@arquiteturanosense.com.br</a>
+            </div>
+            <div class="footer-col">
+                <h4>Siga-nos nas redes sociais</h4>
+                <a href="#">Instagram.com/ramonarquiteto</a>
+                <a href="#">TikTok.com/@ramonarquiteto</a>
+            </div>
+            <div class="footer-col">
+                <h4>Venha nos visitar</h4>
+                <p>Contêiner Abandonado, Bloco Z, Conjunto 000</p>
+                <p>Barra da Tijuca - Rio de Janeiro - RJ</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Todos os direitos reservados para Ramon Arquitetura e Interiores (ou quase todos).</p>
+        </div>
+    </footer>
 
-function voltarInicio(manual = false) {
-    document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
-    document.getElementById('tela-principal').style.display = 'flex';
-    window.scrollTo(0, 0);
-    if (manual) {
-        history.replaceState(null, '', window.location.pathname);
-    }
-}
+    <!-- BOTÕES FLUTUANTES -->
+    <div class="lang-float">
+        <span>🇧🇷</span> PT <span style="font-size: 10px;">▲</span>
+    </div>
 
-window.addEventListener('popstate', function(event) {
-    if (event.state && event.state.pagina) {
-        document.getElementById('tela-principal').style.display = 'none';
-        document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
-        document.getElementById('pagina-' + event.state.pagina).style.display = 'block';
-        window.scrollTo(0, 0);
-    } else {
-        document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
-        document.getElementById('tela-principal').style.display = 'flex';
-        window.scrollTo(0, 0);
-    }
-});
+    <div class="whatsapp-float" onclick="window.open('https://wa.me/5521999999999')">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.064 3.488"/></svg>
+        <span>Entre em<br>contato</span>
+    </div>
 
-function abrirLightbox(src) {
-    document.getElementById('img-ampliada').src = src;
-    document.getElementById('lightbox').style.display = 'flex';
-}
+    <!-- SCRIPT QUE FAZ OS BOTÕES FUNCIONAREM E O VOLTAR DO CHROME -->
+    <script>
+        // Textos No Sense para cada projeto
+        const textosProjetos = {
+            "Projeto Piscina no Teto": "<p>Este projeto desafiou a gravidade. A piscina foi instalada no teto da sala de estar, exigindo que os moradores usem sapatos antiderrapantes com ventosas. A água cai para cima e o chuveiro é na verdade um aspirador de pó invertido.</p><p><strong>A marcenaria foi feita com macarrão</strong> e a iluminação é feita por vaga-lumes robóticos.</p>",
+            "Casa do Vento Invertido": "<p>Uma casa onde as janelas sugam o vento em vez de deixá-lo entrar. Os móveis são colados no teto e os moradores precisam andar de cabeça para baixo. O arquiteto diz que é uma metáfora para a vida moderna.</p><p><strong>O piso é feito de gelatina azul</strong> para simular o céu.</p>",
+            "Porta para Lugar Nenhum": "<p>Uma porta de madeira maciça que, quando aberta, dá de cara com uma parede de tijolos. O trinco é de ouro maciço e a maçaneta foi importada da Lua. A porta não abre, mas é bonita.</p><p><strong>O objetivo era criar um senso de expectativa</strong> que nunca se concretiza.</p>",
+            "Parede de Gelatina": "<p>Literalmente uma parede de gelatina de morango. O cliente pediu 'algo doce', e o arquiteto entregou. O problema é que as formigas adoraram o projeto.</p><p><strong>A gelatina foi substituída por concreto</strong> após a terceira semana.</p>",
+            "Chão de Nuvem": "<p>O chão é feito de algodão doce e fumaça. Os móveis flutuam e a escada é uma ilusão de ótica. Para ir ao banheiro, é preciso nadar no ar.</p><p><strong>O projeto foi cancelado</strong> porque os clientes não conseguiam ficar em pé.</p>",
+            "Privada de Espelhos": "<p>Um banheiro feito inteiramente de espelhos. Você nunca sabe onde está a privada de verdade. O arquiteto alega que isso 'expande a mente'.</p><p><strong>Infelizmente, o cliente bateu a cabeça</strong> 14 vezes na primeira semana.</p>",
+            "Casarão Senta, Teresa!": "<p>Uma casa que guarda a memória de chegar e de voltar. O problema é que as escadas levam para o mesmo lugar e as portas só abrem por fora. O arquiteto Ramon diz que é um 'labirinto existencial'.</p><p><strong>A decoração é feita de espelhos e fumaça</strong>, para que ninguém saiba onde está.</p>"
+        };
 
-function fecharLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-}
+        // Variável para guardar a tela atual
+        let telaAtual = 'home';
 
-// ANIMAÇÃO DE FUNDO (partículas amarelas suaves + conexões)
-(function(){
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  const particleCount = 70;
+        // Função para abrir o projeto
+        function openProject(titulo, imagem) {
+            // Muda a URL do navegador para o botão Voltar do Chrome funcionar
+            window.location.hash = "projeto";
+            telaAtual = 'projeto';
 
-  function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
+            // Esconde a Home, mostra o Projeto
+            document.getElementById('home-screen').style.display = 'none';
+            document.getElementById('project-screen').style.display = 'block';
 
-  class Particle {
-    constructor(){
-      this.reset();
-    }
-    reset(){
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.radius = Math.random() * 1.8 + 0.6;
-    }
-    update(){
-      this.x += this.vx;
-      this.y += this.vy;
-      if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
-      if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
-    }
-    draw(){
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(250, 204, 21, 0.55)';
-      ctx.fill();
-    }
-  }
+            // Preenche os dados
+            document.getElementById('pagina-titulo').innerText = titulo;
+            document.getElementById('pagina-imagem').src = imagem;
+            document.querySelector('.project-page-hero').style.backgroundImage = `url('${imagem}')`;
 
-  for(let i = 0; i < particleCount; i++) particles.push(new Particle());
+            // Pega o texto no sense. Se não achar, coloca um padrão.
+            let texto = textosProjetos[titulo] || "<p>Este projeto é tão absurdo que nem o arquiteto sabe explicar.</p>";
+            document.getElementById('pagina-texto').innerHTML = texto;
 
-  function animate(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, i) => {
-      p.update();
-      p.draw();
-      for(let j = i + 1; j < particles.length; j++){
-        const dx = p.x - particles[j].x;
-        const dy = p.y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 120){
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(250, 204, 21, ${0.12 * (1 - dist/120)})`;
-          ctx.lineWidth = 0.6;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-      }
-    });
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
-</script>
+
+        // Função para fechar o projeto
+        function closeProject() {
+            // Remove o #projeto da URL
+            if (window.location.hash === "#projeto") {
+                history.pushState("", document.title, window.location.pathname + window.location.search);
+            }
+            telaAtual = 'home';
+
+            // Mostra a Home, esconde o Projeto
+            document.getElementById('project-screen').style.display = 'none';
+            document.getElementById('home-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Ouve o botão "Voltar" do Chrome
+        window.onpopstate = function() {
+            if (window.location.hash !== "#projeto" && telaAtual === 'projeto') {
+                closeProject();
+            }
+        };
+    </script>
 </body>
-</html>
+</html>    
