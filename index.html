@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escritório de Arquitetura no Rio de Janeiro | Ramon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Alike&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-header: #7f5f49;
+            --cor-header-escura: #523b2d;
+            --cor-fundo: #f8efe5;
+            --cor-fundo-suave: #efe1d0;
+            --cor-texto: #1f1a17;
+            --cor-titulo: #b64d10;
+            --cor-destaque: #d7681d;
+            --cor-branco: #fffdf9;
+            --sombra-suave: 0 18px 40px rgba(48, 28, 20, 0.14);
+            --sombra-mais-forte: 0 22px 44px rgba(38, 22, 16, 0.2);
+            --font-alike: 'Alike', serif;
+            --font-opensans: 'Open Sans', sans-serif;
+            --font-quicksand: 'Quicksand', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-opensans);
+            background: linear-gradient(180deg, #f7f1e7 0%, var(--cor-fundo) 100%);
+            color: var(--cor-texto);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(182, 77, 16, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(182, 77, 16, 0.18); }
+        }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+
+        /* --- HEADER MARROM --- */
+        .header {
+            background: linear-gradient(90deg, var(--cor-header) 0%, var(--cor-header-escura) 100%);
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(78, 52, 35, 0.18);
+            backdrop-filter: blur(10px);
+        }
+        .logo { font-family: var(--font-alike); color: #fff; font-size: 38px; line-height: 1; cursor: pointer; letter-spacing: 0.04em; }
+        .logo span { display: block; font-family: var(--font-opensans); font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 7px; }
+        .nav-menu { display: flex; list-style: none; gap: 32px; align-items: center; }
+        .nav-menu li a {
+            color: #fff;
+            font-size: 15px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease, filter 0.25s ease;
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 4px;
+            display: inline-block;
+            text-shadow: 0 0 0 rgba(255,255,255,0);
+        }
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.9), rgba(255,255,255,0.3));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .nav-menu li a:hover {
+            opacity: 1;
+            transform: translateY(-1px) scale(1.03);
+            color: #fffdf7;
+            text-shadow: 0 6px 18px rgba(255,255,255,0.18);
+            filter: brightness(1.05);
+        }
+        .nav-menu li a:hover::after { transform: scaleX(1); }
+        .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 999px;
+            padding: 8px 18px;
+            width: 260px;
+            background: rgba(255,255,255,0.04);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+        .search-container:focus-within {
+            border-color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.07);
+        }
+        .search-container input { background: transparent; border: none; color: #fff; outline: none; font-size: 14px; width: 100%; }
+        .search-container input::placeholder { color: rgba(255,255,255,0.72); }
+        .search-container button { background: transparent; border: none; color: #fff; cursor: pointer; display: flex; align-items: center; opacity: 0.85; }
+
+        /* --- HERO (TOPO IGUAL AO PRINT) --- */
+        .hero {
+            width: 100%; height: 82vh;
+            min-height: 640px;
+            background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; padding-left: 10%;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(19,16,14,0.7), rgba(19,16,14,0.14));
+        }
+        .hero-box {
+            background: rgba(15, 12, 10, 0.56);
+            backdrop-filter: blur(2px);
+            padding: 60px 56px;
+            max-width: 820px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: var(--sombra-suave);
+            animation: floatIn 0.9s ease-out both;
+        }
+        .hero-title { font-family: var(--font-alike); font-size: clamp(3.1rem, 4.8vw, 5rem); line-height: 0.96; margin-bottom: 24px; font-weight: 400; letter-spacing: 0.015em; text-transform: none; }
+        .hero-subtitle { font-family: var(--font-opensans); font-size: clamp(1.15rem, 1.8vw, 1.5rem); font-weight: 400; line-height: 1.6; margin-bottom: 32px; max-width: 760px; letter-spacing: 0.01em; }
+        .btn-hero {
+            display: inline-block; padding: 16px 38px; border: 1px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.05); color: #fff;
+            font-family: var(--font-opensans); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2.2px; cursor: pointer; transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.14);
+        }
+        .btn-hero:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(240,223,201,0.92));
+            color: #1d1a17; transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 32px rgba(0,0,0,0.2); border-color: rgba(255,255,255,1);
+        }
+
+        /* --- TÍTULOS GERAIS --- */
+        .section-title {
+            font-family: var(--font-alike); font-size: clamp(2.2rem, 3vw, 3rem); color: var(--cor-titulo); text-align: center; margin-bottom: 50px; letter-spacing: 0.02em; position: relative; display: inline-block; left: 50%; transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 72px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-destaque), #e7a362);
+            margin: 18px auto 0;
+            border-radius: 999px;
+        }
+
+        /* --- PROJETOS GERAIS (HOME) --- */
+        .projects-section { padding: 100px 50px; max-width: 1400px; margin: 0 auto; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; overflow: visible; }
+        .project-card {
+            position: relative; height: 450px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 30px; cursor: pointer;
+            box-shadow: var(--sombra-mais-forte); border-radius: 22px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; animation: fadeUp 0.8s ease-out both;
+            border: 1px solid rgba(255,255,255,0.08); z-index: 1;
+        }
+        .project-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+            transition: box-shadow 0.35s ease;
+            pointer-events: none;
+        }
+        .project-card:hover {
+            transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: rgba(255,255,255,0.35); z-index: 10;
+        }
+        .project-card:hover::after {
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.2), 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .project-card::before {
+            content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.1));
+            transition: filter 0.35s ease;
+        }
+        .project-card:hover::before {
+            filter: saturate(1.15) brightness(1.05);
+        }
+        .project-bg, .casacor-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; z-index: 0;
+        }
+        .project-card:hover .project-bg,
+        .casacor-card:hover .casacor-bg {
+            transform: scale(1.03);
+        }
+        .project-info { position: relative; z-index: 2; color: #fff; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+        .project-name { font-family: var(--font-alike); font-size: clamp(1.7rem, 2vw, 2.2rem); line-height: 1.1; font-weight: 400; }
+
+        .project-icon {
+            width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.9); border-radius: 50%; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.08);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1); transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+            backdrop-filter: blur(2px);
+        }
+        .project-card:hover .project-icon {
+            transform: translateY(-2px) scale(1.08) rotate(90deg);
+            background: rgba(255,255,255,0.14);
+            border-color: rgba(255,255,255,1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.16);
+        }
+        .project-icon svg {
+            width: 18px; height: 18px; stroke: #fff; stroke-width: 2.2; transition: transform 0.28s ease;
+        }
+        .project-card:hover .project-icon svg {
+            transform: scale(1.1);
+        }
+
+        .project-card .project-bg,
+        .casacor-card .casacor-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+        }
+        .project-card:hover .project-bg,
+        .casacor-card:hover .casacor-bg {
+            transform: scale(1.03);
+        }
+
+        /* --- CASACOR (EDIÇÕES ANTERIORES) --- */
+        .casacor-section { padding: 100px 50px; background: linear-gradient(180deg, #e7dcc7 0%, #e0d0b8 100%); }
+        .casacor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; overflow: visible; }
+        .casacor-card {
+            position: relative; height: 400px; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 40px; cursor: pointer; overflow: hidden; border-radius: 18px;
+            box-shadow: var(--sombra-mais-forte); transition: transform 0.4s ease, box-shadow 0.4s ease; animation: fadeUp 0.9s ease-out both; border: 1px solid rgba(255,255,255,0.06); z-index: 1;
+        }
+        .casacor-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+            transition: box-shadow 0.35s ease;
+            pointer-events: none;
+        }
+        .casacor-card:hover {
+            transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: rgba(255,255,255,0.26); z-index: 10;
+        }
+        .casacor-card:hover::after {
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.12), 0 0 0 1px rgba(255,255,255,0.08);
+        }
+        .casacor-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.86), rgba(0,0,0,0.3), transparent); }
+        .casacor-info { position: relative; z-index: 2; color: #fff; }
+        .casacor-year { font-size: 14px; text-transform: uppercase; letter-spacing: 2.2px; margin-bottom: 10px; display: block; font-weight: 700; }
+        .casacor-title { font-family: var(--font-alike); font-size: 32px; margin-bottom: 15px; }
+
+        /* --- SOBRE --- */
+        .about-section { padding: 100px 50px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+        .profile-img { width: 100%; max-width: 400px; border-radius: 50%; border: 5px solid var(--cor-header); aspect-ratio: 1/1; object-fit: cover; box-shadow: var(--sombra-suave); }
+        .about-text h2 { font-family: var(--font-alike); font-size: clamp(2.3rem, 3.6vw, 3rem); color: var(--cor-titulo); margin-bottom: 30px; line-height: 1.1; }
+        .about-text p { font-size: 16px; line-height: 1.85; margin-bottom: 15px; }
+        .about-text strong {
+            color: var(--cor-titulo);
+            transition: color 0.2s ease;
+        }
+        .about-text strong:hover { color: var(--cor-destaque); }
+
+        /* --- RODAPÉ --- */
+        .footer { padding: 80px 50px 30px; background: linear-gradient(180deg, #47382f 0%, #2f231f 100%); color: #faefe0; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer h3 { font-family: var(--font-alike); font-size: clamp(2.2rem, 3vw, 2.8rem); margin-bottom: 30px; grid-column: 1 / -1; color: #faefe0; }
+        .footer-col h4 { font-family: var(--font-opensans); font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.08em; }
+        .footer-col a, .footer-col p { display: block; margin-bottom: 10px; font-size: 15px; color: #faefe0; opacity: 0.82; transition: transform 0.25s ease, opacity 0.25s ease, text-shadow 0.25s ease, color 0.25s ease; }
+        .footer-col a:hover {
+            opacity: 1; text-decoration: underline; transform: translateX(2px) scale(1.01); color: #fffaf3; text-shadow: 0 6px 18px rgba(255,255,255,0.12);
+        }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(250, 239, 224, 0.2); font-size: 13px; }
+
+        /* --- BOTÕES FLUTUANTES --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: linear-gradient(180deg, #37dc72 0%, #1eb85d 100%); width: 78px; height: 78px; border-radius: 50%; display: flex;
+            flex-direction: column; justify-content: center; align-items: center; color: white; box-shadow: 0 16px 30px rgba(25, 126, 72, 0.22); z-index: 1000; cursor: pointer; text-align: center;
+            font-size: 11px; font-family: var(--font-opensans); font-weight: 600; line-height: 1.2; transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+            animation: pulseGlow 3.2s ease-in-out infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .whatsapp-float:hover {
+            transform: translateY(-4px) scale(1.05); box-shadow: 0 20px 38px rgba(25, 126, 72, 0.28); filter: brightness(1.05);
+        }
+        .whatsapp-float svg { width: 26px; height: 26px; fill: white; margin-bottom: 3px; }
+        .lang-float {
+            position: fixed; bottom: 30px; right: 120px; background: linear-gradient(135deg, rgba(135, 101, 78, 0.96), rgba(98, 74, 58, 0.98)); padding: 12px 18px; color: white; border-radius: 999px; display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-opensans); font-size: 14px; z-index: 1000; cursor: pointer; box-shadow: 0 12px 24px rgba(60, 45, 35, 0.22); border: 1px solid rgba(255,255,255,0.18);
+            transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
+        }
+        .lang-float:hover {
+            transform: translateY(-2px) scale(1.03); box-shadow: 0 16px 28px rgba(60, 45, 35, 0.26); filter: brightness(1.04);
+        }
+
+        /* --- PÁGINA DO PROJETO ABERTA --- */
+        .project-page { display: none; background-color: var(--cor-fundo); min-height: 100vh; padding-bottom: 100px; }
+        .project-page-hero {
+            width: 100%; height: 420px; background-image: url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; position: relative;
+            animation: fadeUp 0.7s ease-out both;
+        }
+        .project-page-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45));
+        }
+        .project-page-content { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        .project-page-title { font-family: var(--font-alike); font-size: clamp(2.5rem, 4vw, 3.4rem); color: var(--cor-titulo); text-align: center; margin-bottom: 60px; font-weight: normal; }
+        .project-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start; }
+        .project-text { font-family: var(--font-opensans); font-size: 16px; line-height: 1.9; color: var(--cor-texto); }
+        .project-text p { margin-bottom: 25px; }
+        .project-text strong { font-weight: 700; }
+        .project-image-large { width: 100%; height: auto; object-fit: cover; box-shadow: 0 18px 35px rgba(41, 24, 17, 0.12); border-radius: 18px; }
+        .btn-voltar { display: inline-block; margin-bottom: 30px; font-family: var(--font-opensans); color: var(--cor-titulo); font-weight: 700; cursor: pointer; border: none; background: none; font-size: 16px; letter-spacing: 0.04em; }
+        .btn-voltar:hover { text-decoration: underline; }
+
+        @media (max-width: 900px) {
+            .project-layout, .about-section, .footer-container { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 20px; padding: 20px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 12px 20px; }
+            .search-container { width: min(100%, 320px); }
+            .hero { padding-left: 20px; padding-right: 20px; height: auto; min-height: 540px; }
+            .hero-box { padding: 32px 26px; margin-right: 0; width: 100%; }
+            .project-page-title { font-size: 32px; }
+            .lang-float { display: none; }
+            .profile-img { margin: 0 auto; }
+            .project-card { height: 380px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <div class="logo" onclick="closeProject()">
+            RAMON
+            <span>arquitetura e interiores</span>
+        </div>
+        <ul class="nav-menu">
+            <li><a onclick="closeProject()">Home</a></li>
+            <li><a onclick="closeProject()">Projetos</a></li>
+            <li><a onclick="closeProject()">Serviços</a></li>
+            <li><a onclick="closeProject()">Sobre</a></li>
+            <li><a onclick="closeProject()">Fale conosco</a></li>
+        </ul>
+        <div class="search-container">
+            <input type="text" placeholder="Pesquisar...">
+            <button><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- TELA 1: HOME (Site Principal) -->
+    <!-- ========================================== -->
+    <div id="home-screen">
+        
+        <section class="hero">
+            <div class="hero-box">
+                <h1 class="hero-title">Casarão Senta, Teresa!</h1>
+                <p class="hero-subtitle">Uma casa que guarda a memória de chegar e de voltar, assinada por Ramon na CASACOR Rio 2026. Cuidado com o degrau que não existe.</p>
+                <button class="btn-hero" onclick="openProject('Casarão Senta, Teresa!', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop')">MAIS DETALHES</button>
+            </div>
+        </section>
+
+        <section class="projects-section">
+            <h2 class="section-title">Projetos Sem Sentido</h2>
+            <div class="projects-grid">
+                
+                <!-- Projeto 1 -->
+                <div class="project-card" onclick="openProject('Projeto Piscina no Teto', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="project-bg" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop" alt="Projeto Piscina no Teto">
+                    <div class="project-info">
+                        <div class="project-name">Projeto Piscina no Teto</div>
+                        <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <div class="project-card" onclick="openProject('Casa do Vento Invertido', 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="project-bg" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" alt="Casa do Vento Invertido">
+                    <div class="project-info">
+                        <div class="project-name">Casa do Vento Invertido</div>
+                        <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    </div>
+                </div>
+
+                <!-- Projeto 3 -->
+                <div class="project-card" onclick="openProject('Porta para Lugar Nenhum', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="project-bg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Porta para Lugar Nenhum">
+                    <div class="project-info">
+                        <div class="project-name">Porta para Lugar Nenhum</div>
+                        <div class="project-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="casacor-section">
+            <h2 class="section-title">Projetos CasaCor Rio (O Caos)</h2>
+            <div class="casacor-grid">
+                
+                <div class="casacor-card" onclick="openProject('Parede de Gelatina', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="casacor-bg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" alt="Parede de Gelatina">
+                    <div class="casacor-info">
+                        <span class="casacor-year">CASACOR Rio 2026</span>
+                        <h3 class="casacor-title">Parede de Gelatina</h3>
+                        <p>Living de 75 m² (que derreteu)</p>
+                    </div>
+                </div>
+
+                <div class="casacor-card" onclick="openProject('Chão de Nuvem', 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="casacor-bg" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" alt="Chão de Nuvem">
+                    <div class="casacor-info">
+                        <span class="casacor-year">CASACOR Rio 2025</span>
+                        <h3 class="casacor-title">Chão de Nuvem</h3>
+                        <p>Living flutuante de 104 m²</p>
+                    </div>
+                </div>
+
+                <div class="casacor-card" onclick="openProject('Privada de Espelhos', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop')">
+                    <img class="casacor-bg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Privada de Espelhos">
+                    <div class="casacor-info">
+                        <span class="casacor-year">CASACOR Rio 2024</span>
+                        <h3 class="casacor-title">Privada de Espelhos</h3>
+                        <p>Estúdio de 54 m² (labirinto)</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="about-section">
+            <img src="foto_perfil.png" alt="Ramon" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop'">
+            <div class="about-text">
+                <h2>Sobre o Ramon</h2>
+                <p>O <strong>Ramon</strong> é arquiteto e designer de interiores do Rio de Janeiro, formado pela Faculdade de Arquitetura e Urbanismo da UFRJ (mas ele não lembra de nada do que estudou).</p>
+                <p>Ele dirige o escritório <strong>Ramon Arquitetura e Design do Absurdo</strong>, instalado em um contêiner abandonado no meio da Barra da Tijuca, Rio de Janeiro.</p>
+                <p><strong>Fundado em 2005</strong>, atua nos segmentos <strong>residencial</strong> (onde as portas não fecham) e <strong>comercial</strong> (onde ninguém quer entrar). Também desenvolve conceitos e projetos de stands e espaços de relacionamento para <strong>empreendimentos imobiliários que faliram.</strong></p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TELA 2: PÁGINA DO PROJETO (Janela que abre) -->
+    <!-- ========================================== -->
+    <div id="project-screen" class="project-page">
+        <div class="project-page-hero"></div>
+        <div class="project-page-content">
+            
+            <button class="btn-voltar" onclick="closeProject()">← Voltar para Projetos</button>
+            <h1 class="project-page-title" id="pagina-titulo">Projeto</h1>
+
+            <div class="project-layout">
+                <div class="project-text" id="pagina-texto">
+                    <!-- O texto será injetado pelo JavaScript -->
+                </div>
+                
+                <div>
+                    <img id="pagina-imagem" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1000&auto=format&fit=crop" alt="Foto do Projeto" class="project-image-large">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="footer-container">
+            <h3>Fale Conosco</h3>
+            <div class="footer-col">
+                <h4>Entre em contato (se puder)</h4>
+                <a href="#">Via WhatsApp - (21) 99999-9999</a>
+                <a href="#">ramon@arquiteturanosense.com.br</a>
+            </div>
+            <div class="footer-col">
+                <h4>Siga-nos nas redes sociais</h4>
+                <a href="#">Instagram.com/ramonarquiteto</a>
+                <a href="#">TikTok.com/@ramonarquiteto</a>
+            </div>
+            <div class="footer-col">
+                <h4>Venha nos visitar</h4>
+                <p>Contêiner Abandonado, Bloco Z, Conjunto 000</p>
+                <p>Barra da Tijuca - Rio de Janeiro - RJ</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Todos os direitos reservados para Ramon Arquitetura e Interiores (ou quase todos).</p>
+        </div>
+    </footer>
+
+    <!-- BOTÕES FLUTUANTES -->
+    <div class="lang-float">
+        <span>🇧🇷</span> PT <span style="font-size: 10px;">▲</span>
+    </div>
+
+    <div class="whatsapp-float" onclick="window.open('https://wa.me/5521999999999')">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.064 3.488"/></svg>
+        <span>Entre em<br>contato</span>
+    </div>
+
+    <!-- SCRIPT QUE FAZ OS BOTÕES FUNCIONAREM E O VOLTAR DO CHROME -->
+    <script>
+        // Textos No Sense para cada projeto
+        const textosProjetos = {
+            "Projeto Piscina no Teto": "<p>Este projeto desafiou a gravidade. A piscina foi instalada no teto da sala de estar, exigindo que os moradores usem sapatos antiderrapantes com ventosas. A água cai para cima e o chuveiro é na verdade um aspirador de pó invertido.</p><p><strong>A marcenaria foi feita com macarrão</strong> e a iluminação é feita por vaga-lumes robóticos.</p>",
+            "Casa do Vento Invertido": "<p>Uma casa onde as janelas sugam o vento em vez de deixá-lo entrar. Os móveis são colados no teto e os moradores precisam andar de cabeça para baixo. O arquiteto diz que é uma metáfora para a vida moderna.</p><p><strong>O piso é feito de gelatina azul</strong> para simular o céu.</p>",
+            "Porta para Lugar Nenhum": "<p>Uma porta de madeira maciça que, quando aberta, dá de cara com uma parede de tijolos. O trinco é de ouro maciço e a maçaneta foi importada da Lua. A porta não abre, mas é bonita.</p><p><strong>O objetivo era criar um senso de expectativa</strong> que nunca se concretiza.</p>",
+            "Parede de Gelatina": "<p>Literalmente uma parede de gelatina de morango. O cliente pediu 'algo doce', e o arquiteto entregou. O problema é que as formigas adoraram o projeto.</p><p><strong>A gelatina foi substituída por concreto</strong> após a terceira semana.</p>",
+            "Chão de Nuvem": "<p>O chão é feito de algodão doce e fumaça. Os móveis flutuam e a escada é uma ilusão de ótica. Para ir ao banheiro, é preciso nadar no ar.</p><p><strong>O projeto foi cancelado</strong> porque os clientes não conseguiam ficar em pé.</p>",
+            "Privada de Espelhos": "<p>Um banheiro feito inteiramente de espelhos. Você nunca sabe onde está a privada de verdade. O arquiteto alega que isso 'expande a mente'.</p><p><strong>Infelizmente, o cliente bateu a cabeça</strong> 14 vezes na primeira semana.</p>",
+            "Casarão Senta, Teresa!": "<p>Uma casa que guarda a memória de chegar e de voltar. O problema é que as escadas levam para o mesmo lugar e as portas só abrem por fora. O arquiteto Ramon diz que é um 'labirinto existencial'.</p><p><strong>A decoração é feita de espelhos e fumaça</strong>, para que ninguém saiba onde está.</p>"
+        };
+
+        // Variável para guardar a tela atual
+        let telaAtual = 'home';
+
+        // Função para abrir o projeto
+        function openProject(titulo, imagem) {
+            // Muda a URL do navegador para o botão Voltar do Chrome funcionar
+            window.location.hash = "projeto";
+            telaAtual = 'projeto';
+
+            // Esconde a Home, mostra o Projeto
+            document.getElementById('home-screen').style.display = 'none';
+            document.getElementById('project-screen').style.display = 'block';
+
+            // Preenche os dados
+            document.getElementById('pagina-titulo').innerText = titulo;
+            document.getElementById('pagina-imagem').src = imagem;
+            document.querySelector('.project-page-hero').style.backgroundImage = `url('${imagem}')`;
+
+            // Pega o texto no sense. Se não achar, coloca um padrão.
+            let texto = textosProjetos[titulo] || "<p>Este projeto é tão absurdo que nem o arquiteto sabe explicar.</p>";
+            document.getElementById('pagina-texto').innerHTML = texto;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Função para fechar o projeto
+        function closeProject() {
+            // Remove o #projeto da URL
+            if (window.location.hash === "#projeto") {
+                history.pushState("", document.title, window.location.pathname + window.location.search);
+            }
+            telaAtual = 'home';
+
+            // Mostra a Home, esconde o Projeto
+            document.getElementById('project-screen').style.display = 'none';
+            document.getElementById('home-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Ouve o botão "Voltar" do Chrome
+        window.onpopstate = function() {
+            if (window.location.hash !== "#projeto" && telaAtual === 'projeto') {
+                closeProject();
+            }
+        };
+    </script>
+</body>
+</html>    
